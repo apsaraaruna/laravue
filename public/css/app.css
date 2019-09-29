@@ -40652,3 +40652,24 @@ a.text-dark:focus {
   }
 }
 
+.sidebar .nav-sidebar .nav-item .nav-linkhover {
+  background-color: #4a97e4 !important;
+}
+
+.sidebar .nav-sidebar .nav-item .router-link-exact-active {
+  background-color: #2e6eae;
+  color: #fff;
+}
+
+.sidebar .nav-sidebar .nav-item .router-link-exact-activehover {
+  background-color: #4a97e4 !important;
+}
+
+.sidebar .nav-sidebar .nav-item .router-link-exact-activefocus {
+  background-color: #4a97e4;
+}
+
+.sidebar .nav-sidebar .nav-item .router-link-exact-activeactive {
+  color: #fff;
+}
+

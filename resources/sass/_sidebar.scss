@@ -1,0 +1,25 @@
+.sidebar {
+    .nav-sidebar {
+        .nav-item {
+            .nav-link {
+                &hover {
+                    background-color: #4a97e4 !important;
+                }
+            }
+
+            .router-link-exact-active {
+                background-color: #2e6eae;
+                color: $white;
+                &hover {
+                    background-color: #4a97e4 !important;
+                }
+                &focus {
+                    background-color: #4a97e4;
+                }
+                &active {
+                    color: $white;
+                }
+            }
+        }
+    }
+}
