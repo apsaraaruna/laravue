@@ -67,62 +67,65 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <input
-                v-model="form.name"
-                type="text"
-                name="name"
-                class="form-control"
-                placeholder="Name"
-                :class="{ 'is-invalid': form.errors.has('name') }"
-              />
-              <has-error :form="form" field="title"></has-error>
-            </div>
+          <form @submit.prevent="createUser">
+            <div class="modal-body">
+              <div class="form-group">
+                <input
+                  v-model="form.name"
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  placeholder="Name"
+                  :class="{ 'is-invalid': form.errors.has('name') }"
+                />
+                <has-error :form="form" field="title"></has-error>
+              </div>
 
-            <div class="form-group">
-              <input
-                v-model="form.email"
-                type="text"
-                name="email"
-                class="form-control"
-                placeholder="Email"
-                :class="{ 'is-invalid': form.errors.has('email') }"
-              />
-              <has-error :form="form" field="email"></has-error>
-            </div>
+              <div class="form-group">
+                <input
+                  v-model="form.email"
+                  type="text"
+                  name="email"
+                  class="form-control"
+                  placeholder="Email"
+                  :class="{ 'is-invalid': form.errors.has('email') }"
+                />
+                <has-error :form="form" field="email"></has-error>
+              </div>
 
-            <div class="form-group">
-              <select
-                name="type"
-                id="type"
-                class="form-control"
-                :class="{ 'is-invalid': form.errors.has('type') }"
-              >
-                <option value>Select User Role</option>
-                <option value="1">Admin</option>
-                <option value="2">Artist</option>
-                <option value="3">User</option>
-              </select>
-              <has-error :form="form" field="type"></has-error>
-            </div>
+              <div class="form-group">
+                <select
+                  name="type"
+                  v-model="form.type"
+                  id="type"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('type') }"
+                >
+                  <option value>Select User Role</option>
+                  <option value="1">Admin</option>
+                  <option value="2">Standard User</option>
+                  <option value="3">Author</option>
+                </select>
+                <has-error :form="form" field="type"></has-error>
+              </div>
 
-            <div class="form-group">
-              <input
-                v-model="form.password"
-                type="password"
-                name="password"
-                placeholder="Password"
-                class="form-control"
-                :class="{ 'is-invalid': form.errors.has('password') }"
-              />
-              <has-error :form="form" field="password"></has-error>
+              <div class="form-group">
+                <input
+                  v-model="form.password"
+                  type="password"
+                  name="password"
+                  placeholder="Password"
+                  class="form-control"
+                  :class="{ 'is-invalid': form.errors.has('password') }"
+                />
+                <has-error :form="form" field="password"></has-error>
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Create</button>
-          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Create</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -134,9 +137,17 @@ export default {
   data() {
     return {
       form: new Form({
-        name: ""
+        name: "",
+        email: "",
+        type: "",
+        password: ""
       })
     };
+  },
+  methods: {
+    createUser() {
+      this.form.post("api/user");
+    }
   },
   mounted() {
     console.log("Component mounted.");
