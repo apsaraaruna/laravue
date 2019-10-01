@@ -7,7 +7,7 @@
             <h3 class="card-title">Responsive Hover Table</h3>
 
             <div class="card-tools">
-              <button class="btn btn-success" data-toggle="modal" data-target="#exampleModal">
+              <button class="btn btn-success" data-toggle="modal" data-target="#addNew">
                 <i class="fa fa-user-plus"></i> Add New
               </button>
             </div>
@@ -21,15 +21,17 @@
                   <th>Name</th>
                   <th>Email</th>
                   <th>Type</th>
+                  <th>Register</th>
                   <th>Action</th>
                 </tr>
               </thead>
               <tbody>
                 <tr v-for="user in users" :key="user.id">
                   <td>{{user.id}}</td>
-                  <td>{{user.name}}</td>
+                  <td>{{user.name | upText}}</td>
                   <td>{{user.email}}</td>
                   <td>{{user.type}}</td>
+                  <td>{{user.created_at|myDate}}</td>
                   <td>
                     <a href="#">
                       <i class="fa fa-edit"></i>
@@ -51,7 +53,7 @@
     <!-- Modal -->
     <div
       class="modal fade"
-      id="exampleModal"
+      id="addNew"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalLabel"
@@ -148,11 +150,23 @@ export default {
       axios.get("api/user").then(({ data }) => (this.users = data.data));
     },
     createUser() {
+      this.$Progress.start();
+
       this.form.post("api/user");
+
+      $("#addNew").modal("hide");
+
+      toast.fire({
+        type: "success",
+        title: "successfully"
+      });
+
+      this.$Progress.finish();
     }
   },
   mounted() {
     this.loadUsers();
+    setInterval(this.loadUsers(), 3000);
     console.log("Component mounted.");
   }
 };
